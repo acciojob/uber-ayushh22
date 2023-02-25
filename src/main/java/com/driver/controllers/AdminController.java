@@ -14,25 +14,28 @@ public class AdminController {
 
 	@PostMapping("/register")
 	public ResponseEntity<Void> registerAdmin(@RequestBody Admin admin){
+		adminService.adminRegister(admin);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@PutMapping("/update")
 	public ResponseEntity<Admin> updateAdminPassword(@RequestParam Integer adminId, @RequestParam String password){
+		Admin updatedAdmin= adminService.updatePassword(adminId, password);
 		return new ResponseEntity<>(updatedAdmin, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/delete")
 	public void deleteAdmin(@RequestParam Integer adminId){
+		adminService.deleteAdmin(adminId);
 	}
 
 	@GetMapping("/listOfCustomers")
 	public List<Customer> listOfCustomers() {
-		return listOfCustomers;
+		return adminService.getlistOfCustomers();;
 	}
 
 	@GetMapping("/listOfDrivers")
 	public List<Driver> listOfDrivers() {
-		return listOfDrivers;
+		return adminService.getListOfDrivers();
 	}
 }
